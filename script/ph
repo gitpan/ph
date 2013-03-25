@@ -14,6 +14,7 @@ use Getopt::Long;
 use Term::ReadKey;
 use Sys::Hostname;
 use Pod::Usage;
+use Term::ANSIColor;
 
 sub prompt {
     my ($prompt, @args) = @_;
@@ -71,6 +72,15 @@ sub main {
 
 sub CMD_help {
     pod2usage(-verbose => 2);
+}
+
+sub CMD_issues {
+    my ($user, $repo) = _get_user_repo_with_current_repo('issues');
+    my $res = $pithub->issues->list(user => $user, repo => $repo);
+    while ( my $row = $res->next ) {
+        printf("#%s %s - %s\n", colored(['green'], $row->{number}), $row->{title}, colored(['Cyan'], $row->{user}->{login}));
+        printf("%s\n\n", colored(['white'], $row->{html_url}));
+    }
 }
 
 sub CMD_info {
@@ -247,9 +257,15 @@ sub _get_user_repo_with_current_repo {
     my ($cmd) = @_;
     my ($user, $repo) = _get_user_repo_simple();
     unless ($user && $repo) {
-        ($user, $repo) = (`git remote -v` =~ m{git://github\.com\/([^/ ]+)\/([^/ ]+)\.git});
+        my $remote = `git remote -v`;
+        if ($remote =~ m{git://github\.com\/([^/ ]+)\/([^/ ]+)\.git}) {
+            ($user, $repo) = ($1, $2);
+        } elsif ($remote =~ m{git\@github\.com:([^/]+)/([^/]+)\.git}) {
+            ($user, $repo) = ($1, $2);
+        } else {
+            die "Usage: $0 $cmd plack/Plack\n";
+        }
     }
-    ($user && $repo) // die "Usage: $0 $cmd miyagawa/Plack";
     return ($user, $repo);
 }
 
@@ -361,4 +377,10 @@ Shows this help page.
     % ph all $USERNAME
 
 Clone all repository in your account
+
+=head2 ph issues
+
+    % ph issues
+
+Show list of issues for current project.
 
