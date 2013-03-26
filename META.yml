@@ -27,4 +27,4 @@ resources:
   bugtracker: https://github.com/tokuhirom/ph/issues
   homepage: https://github.com/tokuhirom/ph
   repository: git://github.com/tokuhirom/ph.git
-version: 0.04
+version: 0.05
