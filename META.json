@@ -35,7 +35,12 @@
          }
       }
    },
-   "provides" : {},
+   "provides" : {
+      "App::ph" : {
+         "file" : "lib/App/ph.pm",
+         "version" : "0.06"
+      }
+   },
    "release_status" : "stable",
    "resources" : {
       "bugtracker" : {
@@ -47,5 +52,5 @@
          "web" : "https://github.com/tokuhirom/ph"
       }
    },
-   "version" : "0.05"
+   "version" : "0.06"
 }

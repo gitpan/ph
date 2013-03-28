@@ -14,7 +14,10 @@ meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
   version: 1.4
 name: ph
-provides: {}
+provides:
+  App::ph:
+    file: lib/App/ph.pm
+    version: 0.06
 requires:
   IPC::System::Simple: 0
   Pithub: 0
@@ -27,4 +30,4 @@ resources:
   bugtracker: https://github.com/tokuhirom/ph/issues
   homepage: https://github.com/tokuhirom/ph
   repository: git://github.com/tokuhirom/ph.git
-version: 0.05
+version: 0.06
