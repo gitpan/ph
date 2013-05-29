@@ -1,7 +1,7 @@
 #!/usr/bin/env perl
 use strict;
 use warnings;
-use 5.14.0;
+use 5.010000;
 use Pithub;
 use LWP::UserAgent;
 use HTTP::Request;
@@ -15,6 +15,15 @@ use Term::ReadKey;
 use Sys::Hostname;
 use Pod::Usage;
 use Term::ANSIColor;
+use Encode ();
+use Encode::Locale;
+
+our $VERSION = '0.08';
+
+if (-t) {
+    binmode STDOUT, ":encoding(console_out)";
+    binmode STDERR, ":encoding(console_out)";
+}
 
 sub prompt {
     my ($prompt, @args) = @_;
@@ -72,6 +81,11 @@ sub main {
 
 sub CMD_help {
     pod2usage(-verbose => 2);
+}
+
+sub CMD_version {
+    print "$VERSION\n";
+    exit 0;
 }
 
 sub CMD_issues {
@@ -278,7 +292,7 @@ sub dump_content {
 sub _dump_content {
     my $c = shift;
     if (ref $c eq 'HASH') {
-        for my $key (sort keys $c) {
+        for my $key (sort keys %$c) {
             print(' ' x ($DUMP_DEPTH*2));
             print($key . ': ');
             if (ref $c->{$key} eq 'HASH') {
@@ -377,6 +391,10 @@ Shows this help page.
     % ph all $USERNAME
 
 Clone all repository in your account
+
+=head2 ph version
+
+Show the version number.
 
 =head2 ph issues
 
