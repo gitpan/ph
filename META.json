@@ -4,8 +4,10 @@
       "Tokuhiro Matsuno <tokuhirom @ GMAIL COM>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Minilla/v0.4.3",
-   "license" : "perl_5",
+   "generated_by" : "Minilla/v0.11.0",
+   "license" : [
+      "perl_5"
+   ],
    "meta-spec" : {
       "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
       "version" : "2"
@@ -19,7 +21,8 @@
          "share",
          "eg",
          "examples",
-         "author"
+         "author",
+         "builder"
       ]
    },
    "prereqs" : {
@@ -66,7 +69,7 @@
    "provides" : {
       "App::ph" : {
          "file" : "lib/App/ph.pm",
-         "version" : "0.08"
+         "version" : "0.09"
       }
    },
    "release_status" : "stable",
@@ -80,12 +83,13 @@
          "web" : "https://github.com/tokuhirom/ph"
       }
    },
-   "version" : "0.08",
+   "version" : "0.09",
    "x_contributors" : [
       "mattn <mattn.jp@gmail.com>",
       "Jesse Luehrs <doy@tozt.net>",
       "Chris Weyl <cweyl@alumni.drew.edu>",
       "Syohei YOSHIDA <syohex@gmail.com>",
-      "tokuhirom <tokuhirom@gmail.com>"
+      "Neil Bowers <neil@bowers.com>",
+      "Tokuhiro Matsuno <tokuhirom@gmail.com>"
    ]
 }
